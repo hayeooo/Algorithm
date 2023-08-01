@@ -18,17 +18,15 @@ public class SWEA_1210_Ladder1 {
 	static StringTokenizer st;
 	static int T;
 	static int[][] board;
-	static boolean[][] visited;
-	static int[][] dir= {{1,0},{0,1}};
 	static boolean exist;
 	
 	public static void main(String[] args) throws IOException {
 		br=new BufferedReader(new InputStreamReader(System.in));
 		board=new int[100][100];
 		
-		T=Integer.parseInt(br.readLine());
-		for (int tc=1;tc<=T;tc++) {
-			visited=new boolean[100][100];
+		
+		for (int tc=1;tc<=10;tc++) {
+			T=Integer.parseInt(br.readLine());
 			
 			for (int row=0;row<100;row++) {
 				st=new StringTokenizer(br.readLine()," ");
@@ -36,41 +34,41 @@ public class SWEA_1210_Ladder1 {
 					board[row][col]=Integer.parseInt(st.nextToken());
 				}
 			}
-			System.out.println(board);
+			
 			for (int col=0;col<100;col++) {
-				exist=false;
-				if (board[0][col]==1) {
+				if (board[0][col]==2) {
 					dfs(0,col);
-					System.out.println(exist);
-					if (exist) {
-						System.out.println(col);
-						break;
-					}
+					
 				}
 			}
 		}
 	}
 	
 	public static void dfs(int curRow, int curCol) {
-		if (curRow>99 || curCol>99) {
-			return;
-		}
-		visited[curRow][curCol]=true;
-		if (curRow==99 && board[curRow][curCol]==2) {
-			exist=true;
-			return;
-		}
-		for (int d=0;d<2;d++) {
-			int nxtRow=curRow+dir[d][0];
-			int nxtCol=curCol+dir[d][1];
+		if (curRow==99) {
 			
-			if (nxtCol>99 || nxtRow>99) continue;
-			if (!visited[nxtRow][nxtCol] && board[nxtRow][nxtCol]==1) {
-				dfs(nxtRow,nxtCol);
-				visited[nxtRow][nxtCol]=false;
+			return;
+		}
+		// ¿ÞÂÊ Å½»ö
+		if (curCol-1>=0 && board[curRow][curCol-1]==1) {
+			for (int idx=curCol-1;idx>=0;idx++) {
+				if (board[curRow+1][idx]==1) {
+					dfs(curRow+1,idx);
+					break;
+				}
 			}
 		}
-		return;
+		// ¿À¸¥ÂÊ Å½»ö
+		else if (curCol+1<=99 && board[curRow][curCol+1]==1) {
+			for (int idx=curCol+1;idx<=99;idx++) {
+				if (board[curRow+1][idx]==1) {
+					dfs(curRow+1,idx);
+					break;
+				}
+			}
+		}
+		
+		dfs(curRow+1,curCol);
 	}
 
 	
