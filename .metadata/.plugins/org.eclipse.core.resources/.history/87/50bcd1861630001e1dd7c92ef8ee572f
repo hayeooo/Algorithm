@@ -1,0 +1,10 @@
+package practice;
+import java.io.*;
+
+public class BOJ_17478_Àç±ÍÇÔ¼ö°¡¹º°¡¿ä {
+	static BufferedReader br;
+	
+	public static void main(String[] args) {
+		
+	}
+}

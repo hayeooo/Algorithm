@@ -1,0 +1,69 @@
+package Recursion;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+/*
+ * SWEA 2805: 농작물 수확하기
+ * 1. 테스트 케이스 수 입력 받기
+ * 2. 농장의 크기 입력 받기
+ * 3. 농작물의 가치 배열에 입력받기
+ * 4. 재귀 함수를 사용하여 계산한 수익 출력
+ *  4-1. 초기 시작: 배열[0][중간]
+ *  4-2. start-1, end+1 로 범위를 늘려가며 수익 합계 계산
+ *  4-3. start==0, end==N-1 이면 범위를 줄여가며 수익 합계 계산
+ *  4-4. 배열의 마지막 row까지 도달했을 경우 재귀 함수 종료 
+ * */
+public class SWEA_2805_농작물수확하기 {
+	static BufferedReader br;
+	static int T;
+	static int N;
+	static int[][] board;
+	static int sum;
+	
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		br=new BufferedReader(new InputStreamReader(System.in));
+		
+		T=Integer.parseInt(br.readLine().trim());
+		
+		for (int test_case=1;test_case<=T;test_case++) {
+			N=Integer.parseInt(br.readLine().trim());
+			board=new int[N][N];
+			
+			for (int row=0;row<N;row++) {
+				char[] row_arr=br.readLine().trim().toCharArray();
+				for (int col=0;col<N;col++) {
+					board[row][col]=row_arr[col]-'0';
+					
+				}
+			}
+			sum=0;
+			int start=(N-1)/2;
+			investigate(start,start,0,false);
+			System.out.printf("#%d %d",test_case,sum);
+		}
+		
+		
+		
+	}
+	
+	public static void investigate(int start,int end, int curDepth,boolean convert) {
+		if (curDepth==N) {
+			return;
+		}
+		for (int veg=start;veg<=end;veg++) {
+			sum+=board[curDepth][veg];
+		}
+		
+		if (start==0) {
+			convert=true;
+		}
+		if (!convert) {
+			investigate(start-1,end+1,curDepth+1,convert);
+		}else {
+			investigate(start+1,end-1,curDepth+1,convert);
+		}
+	}
+
+}

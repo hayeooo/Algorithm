@@ -1,0 +1,21 @@
+package Recursion;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class 중복순열 {
+	static BufferedReader br;
+	static int N;
+	static int R;
+	static int[] res;
+	
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		br=new BufferedReader(new InputStreamReader(System.in));
+		N=Integer.parseInt(br.readLine().trim());
+		R=Integer.parseInt(br.readLine().trim())
+	}
+	public static void dupPerm() {
+		
+	}
+}

@@ -1,0 +1,18 @@
+package Recursion;
+
+public class SWEA_2805_농작물수확하기 {
+	static int T;
+	static int N;
+	static int[][] board;
+	
+	public static void main(String[] args) {
+		
+	}
+	
+	public static void investigate(int start,int end, int curDepth) {
+		if (curDepth==N) {
+			return;
+		}
+	}
+
+}

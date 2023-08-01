@@ -1,0 +1,19 @@
+package Recursion;
+
+import java.util.*;
+import java.io.*;
+
+public class SWEA_1208_Flatten {
+	static BufferedReader br;
+	static int T=10;
+	
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		br=new BufferedReader(new InputStreamReader(System.in));
+		int N=Integer.parseInt(br.readLine());
+		for (int test_case=1;test_case<=10;test_case++) {
+			List<Integer> list=new ArrayList<>();
+			
+		}
+	}
+
+}

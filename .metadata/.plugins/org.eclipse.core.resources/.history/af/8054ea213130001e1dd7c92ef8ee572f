@@ -1,0 +1,33 @@
+package Recursion;
+
+import java.util.*;
+import java.io.*;
+/*
+ * 
+ * */
+public class SWEA_1208_Flatten {
+	static BufferedReader br;
+	static final int T=10;
+	static StringTokenizer st;
+	
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		br=new BufferedReader(new InputStreamReader(System.in));
+		
+		for (int test_case=1;test_case<=T;test_case++) {
+			List<Integer> list=new ArrayList<>();
+			int N=Integer.parseInt(br.readLine());
+			st=new StringTokenizer(br.readLine()," ");
+			while (st.hasMoreTokens()) {
+				list.add(Integer.parseInt(st.nextToken()));
+			}
+			for (int dump=0;dump<N;dump++) {
+				Collections.sort(list);
+				list.set(0, list.get(0)+1);
+				list.set(list.size()-1, list.get(list.size()-1)-1);
+			}
+			Collections.sort(list);
+			System.out.printf("#%d %d%n",test_case, list.get(list.size()-1)-list.get(0));
+		}
+	}
+
+}

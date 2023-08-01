@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;Algorithm&apos;&#x0D;&#x0A;- Original project: &apos;Algorithm&apos;&#x0D;&#x0A;- Original element: &apos;practice.BOJ_17478_재귀함수가뭔가요.java&apos;" description="Delete element" element1="/src&lt;practice{BOJ_17478_재귀함수가뭔가요.java" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1690858380437" subPackages="false" version="1.0"/>
+</session>

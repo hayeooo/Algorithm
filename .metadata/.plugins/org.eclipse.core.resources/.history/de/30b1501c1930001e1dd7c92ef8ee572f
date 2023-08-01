@@ -1,0 +1,21 @@
+package Recursion;
+
+import java.io.*;
+
+/*
+ * 순열 구현
+ * 
+ * */
+public class 순열 {
+	static BufferedReader br;
+	static boolean[] visited;
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		br=new BufferedReader(new InputStreamReader(System.in));
+		int N=Integer.parseInt(br.readLine().trim());
+	}
+	
+	public static void permutation(int cnt) {
+		
+	}
+
+}

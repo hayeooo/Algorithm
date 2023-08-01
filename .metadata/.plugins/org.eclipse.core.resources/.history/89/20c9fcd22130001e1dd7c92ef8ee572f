@@ -1,0 +1,40 @@
+package Recursion;
+
+import java.io.*;
+import java.util.Arrays;
+
+/*
+ * 순열 구현
+ * 
+ * */
+public class 순열 {
+	static BufferedReader br;
+	static boolean[] visited;
+	static int[] res;
+	static int N;
+	static int R;
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		br=new BufferedReader(new InputStreamReader(System.in));
+		N=Integer.parseInt(br.readLine().trim());
+		R=Integer.parseInt(br.readLine().trim());
+		visited=new boolean[N+1];
+		res=new int[R+1];
+		
+		permutation(0);
+	}
+	
+	public static void permutation(int cnt) {
+		if (cnt==R) {
+			System.out.println(Arrays.toString(res));
+		}
+		for (int number=1;number<=N;number++) {
+			if (!visited[number]) {
+				res[cnt]=number;
+				visited[number]=true;
+				permutation(cnt+1);
+				visited[number]=false;
+			}
+		}
+	}
+
+}
