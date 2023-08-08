@@ -51,7 +51,10 @@ public class BOJ_16926_배열돌리기1 {
 		
 		// 사각형 변의 길이가 1보다 클 때 회전시킨다.
 		while (height>1 && width>1) {
-			for (int r=0;r<R;r++) {
+			int nextHeight=Math.max(height-2, 0);
+			int nextWidth=Math.max(width-2, 0);
+			int rotateCnt=R%((height*width)-(nextHeight*nextWidth));
+			for (int r=0;r<rotateCnt;r++) {
 				rotate(startRow,startCol,width,height);
 			}
 			// 다음 회전 시킬 숫자가 들어있는 사각형을 구한다.
