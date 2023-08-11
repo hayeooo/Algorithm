@@ -3,20 +3,30 @@ package Recursion;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class PermutationNPTest {
+public class CombinationNPTest {
 
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
 		int N=sc.nextInt();
+		int R=sc.nextInt();
 		int[] input=new int[N];
+		int[] p=new int[N];
 		
 		for (int i=0;i<N;i++) {
 			input[i]=sc.nextInt();
 		}
-		Arrays.sort(input);  	// 오름차순의 형태로 정렬
+		
+		int cnt=0;
+		while(++cnt<=R) p[N-cnt]=1;
+		
 		do {
-			System.out.println(Arrays.toString(input));
-		}while (np(input));
+			// p 배열을 이용한 조합 확인
+			for (int i=0;i<N;i++) {
+				if(p[i]==0) continue;
+				System.out.print(input[i]+"\t");
+			}
+			System.out.println();
+		}while (np(p));
 	}
 	
 	private static boolean np(int[] p) {	// p: 다음 순열을 원하는 기존 순열의 배열
@@ -47,4 +57,5 @@ public class PermutationNPTest {
 		p[a]=p[b];
 		p[b]=temp;
 	}
+
 }
