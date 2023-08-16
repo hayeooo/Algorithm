@@ -51,13 +51,19 @@ public class BOJ_6987_월드컵_김하연 {
 		dfs(0);
 	}
 	
-	public static void dfs(int stage) {
+	public static boolean dfs(int stage) {
+		// 기저 조건
+		if (stage==15) {
+			return true;
+		}
 		int homeTeam=home[stage];
 		int enemyTeam=enemy[stage];
 		
 		// 해당 stage에서 homeTeam이 이긴 경우
 		if (scores[homeTeam][win]>0 && scores[enemyTeam][lose]>0) {
-			
+			scores[homeTeam][win]--;
+			scores[enemyTeam][lose]--;
+			dfs(stage+1);
 		}
 		// 해당 stage에서 homeTeam이 무승부인 경우
 		if (scores[homeTeam][same]>0 && scores[enemyTeam][lose]>0) {
@@ -67,5 +73,6 @@ public class BOJ_6987_월드컵_김하연 {
 		if (scores[homeTeam][lose]>0 && scores[enemyTeam][lose]>0) {
 			
 		}
+		return false;
 	}
 }
