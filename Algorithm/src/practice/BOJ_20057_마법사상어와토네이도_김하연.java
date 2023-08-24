@@ -5,7 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
-
+/*
+ * BOJ 20057: 마법사 상어와 토네이도
+ * 토네이도가 회전하면서 방향마다 이동할 수 있는 거리를 저장한다. ex) {1,1,2,2,3,3,4,4,5,5,6,6,6}
+ * 이동할 수 있는 거리만큼 반복하면서 모래를 이동시킨다.
+ * 한 방향에서 이동할 수 있는 거리만큼 움직였다면  방향을 바꾼다.
+ */
 public class BOJ_20057_마법사상어와토네이도_김하연 {
 	static BufferedReader br;
 	static StringTokenizer st;
@@ -52,10 +57,11 @@ public class BOJ_20057_마법사상어와토네이도_김하연 {
 		int cd=0;
 		cx=N/2;
 		cy=N/2;
-		System.out.println(Arrays.toString(dist));
+		
 		for (int distIdx=0;distIdx<dist.length;distIdx++) {
 			// 각 방향마다 이동할 수 있는 거리만큼 움직인다.
 			for (int progress=0;progress<dist[distIdx];progress++) {
+				
 				nx=cx+dx[cd];				// y의 위치
 				ny=cy+dy[cd];
 				alphaX=cx+2*dx[cd];			// alpha 위치
@@ -81,7 +87,8 @@ public class BOJ_20057_마법사상어와토네이도_김하연 {
 	public static void moveSand(int cd) {
 		// y 위치에 있는 모든 모래가 비율과 alpha가 적혀있는 칸으로 이동한다.
 		int totalSand=map[nx][ny];
-		int tmp=0;
+		int tmp=0;		// 날아간 모래의 양, alpha에 들어갈 모래 양: totalSand-tmp
+		
 		// 이동할 모래 범위를 탐색한다.
 		int switchDir=0;
 		if (cd==0 || cd==2) {
@@ -89,61 +96,77 @@ public class BOJ_20057_마법사상어와토네이도_김하연 {
 		}
 		// 상,하 또는 좌,우
 		for (int dirIdx=0+switchDir;dirIdx<4;dirIdx+=2) {
+			
 			// x 한 칸 위,아래 또는 좌,우 (0.01)
+			// 모래가 이동할 칸이 배열 범위 내일 경우
 			if (cx+dx[dirIdx]>=0 && cx+dx[dirIdx]<N && cy+dy[dirIdx]>=0 && cy+dy[dirIdx]<N) {
-				map[cx+dx[dirIdx]][cy+dy[dirIdx]]=(int)((totalSand*1)/100);
+				map[cx+dx[dirIdx]][cy+dy[dirIdx]]+=(int)((totalSand*1)/100);
 			}
+			// 그렇지 않을 경우 밖으로 날아간 모래 양에 합산
 			else {
 				spreadSand+=(int)((totalSand*1)/100);
 			}
+			// 날아간 모래 양 반영
 			tmp+=(int)((totalSand*1)/100);
 			
 			// y 한 칸 위, 아래 또는 좌, 우 (0.07)
+			// 모래가 이동할 칸이 배열 범위 내일 경우
 			if (nx+dx[dirIdx]>=0 && nx+dx[dirIdx]<N && ny+dy[dirIdx]>=0 && ny+dy[dirIdx]<N) {
-				map[nx+dx[dirIdx]][ny+dy[dirIdx]]=(int)((totalSand*7)/100);
+				map[nx+dx[dirIdx]][ny+dy[dirIdx]]+=(int)((totalSand*7)/100);
 			}
+			// 그렇지 않을 경우 밖으로 날아간 모래 양에 합산
 			else {
 				spreadSand+=(int)((totalSand*7)/100);
 			}
+			// 날아간 모래 양 반영
 			tmp+=(int)((totalSand*7)/100);
 			
 			// y 두 칸 위, 아래 또는 좌, 우 (0.02)
+			// 모래가 이동할 칸이 배열 범위 내일 경우
 			if (nx+2*dx[dirIdx]>=0 && nx+2*dx[dirIdx]<N && ny+2*dy[dirIdx]>=0 && ny+2*dy[dirIdx]<N) {
-				map[nx+2*dx[dirIdx]][ny+2*dy[dirIdx]]=(int)((totalSand*2)/100);
+				map[nx+2*dx[dirIdx]][ny+2*dy[dirIdx]]+=(int)((totalSand*2)/100);
 			}
+			// 그렇지 않을 경우 밖으로 날아간 모래 양에 합산
 			else {
 				spreadSand+=(int)((totalSand*2)/100);
 			}
+			// 날아간 모래 양 반영
 			tmp+=(int)((totalSand*2)/100);
 			
 			// alpha 한 칸 위, 아래 또는 좌, 우 (0.1)
+			// 모래가 이동할 칸이 배열 범위 내일 경우
 			if (alphaX+dx[dirIdx]>=0 && alphaX+dx[dirIdx]<N && alphaY+dy[dirIdx]>=0 && alphaY+dy[dirIdx]<N) {
-				map[alphaX+dx[dirIdx]][alphaY+dy[dirIdx]]=(int)((totalSand*10)/100);
+				map[alphaX+dx[dirIdx]][alphaY+dy[dirIdx]]+=(int)((totalSand*10)/100);
 			}
+			// 그렇지 않을 경우 밖으로 날아간 모래 양에 합산
 			else {
 				spreadSand+=(int)((totalSand*10)/100);
 			}
+			// 날아간 모래 양 반영
 			tmp+=(int)((totalSand*10)/100);
 			
 		}
 		// alpha 한 칸 옆(현재 방향) - (0.05)
+		// 모래가 이동할 칸이 배열 범위 내일 경우
 		if (alphaX+dx[cd]>=0 && alphaX+dx[cd]<N && alphaY+dy[cd]>=0 && alphaY+dy[cd]<N) {
-			map[alphaX+dx[cd]][alphaY+dy[cd]]=(int)((totalSand*5)/100);
+			map[alphaX+dx[cd]][alphaY+dy[cd]]+=(int)((totalSand*5)/100);
 		}
+		// 그렇지 않을 경우 밖으로 날아간 모래 양에 합산
 		else {
 			spreadSand+=(int)((totalSand*5)/100);
 		}
+		// 날아간 모래 양 반영
 		tmp+=(int)((totalSand*5)/100);
 		
-		// ================여기서부터 다시===================
 		// alpha에 남은 모래양 저장, alpha 범위 확인
 		if (alphaX>=0 && alphaX<N && alphaY>=0 && alphaY<N) {
 			map[alphaX][alphaY]+=(totalSand-tmp);
 		}
+		// alpha에 남을 모래양은 날아간 모래 양에 합산한다.
 		else {
 			spreadSand+=(totalSand-tmp);
 		}
-		// y 위치에서 흩어진 모래 빼기
-		map[nx][ny]-=tmp;
+		// y영역의 모래는 모두 날아갔다.
+		map[nx][ny]=0;
 	}
 }
