@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
  * 세 번째 줄에 각 학생의 점수가 주어진다.
  * 
  */
-public class SWEA_반배치고사_김하연 {
+public class SWEA_16778_반배치고사_김하연 {
 	static BufferedReader br;
 	static StringTokenizer st;
 	static StringBuilder sb;
