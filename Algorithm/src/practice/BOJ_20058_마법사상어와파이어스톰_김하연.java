@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
 
 /*
  * BOJ 20058: 마법사 상어와 파이어스톰
- * 1. 배열 돌리기 (돌릴 사각형 크기, 시작 시작지점)
+ * 1. 배열 돌리기 (돌릴 사각형 크기, 시작 시작지점)을 매개변수로 가지고 부분 격자의 크기에 따라 한 칸씩 움직인다.
  * 2. 파이어스톰 시전
  * 
  * 남아있는 얼음 A[r][c]의 합과 남아있는 얼음 중 가장 큰 덩어리가 차지하는 칸의 개수를 출력한다.
@@ -67,9 +67,11 @@ public class BOJ_20058_마법사상어와파이어스톰_김하연 {
 					rotate(row,col,size);
 				}
 			}
+			
 			// 회전시킨 후
 			// 얼음이 있는 칸 3개 또는 그 이상과 인접해있지 않은 칸은 얼음의 양이 1 줄어든다.
 			reduceIce(n);
+			
 			
 		}
 		// 시전이 끝난 후
@@ -113,7 +115,7 @@ public class BOJ_20058_마법사상어와파이어스톰_김하연 {
 			// 90도 회전이 끝나면 그 다음 바깥 테두리 부분격자로 크기와 위치를 조정한다.
 			curR+=1;
 			curC+=1;
-			curSize/=2;
+			curSize-=2;
 		}
 		
 		
@@ -183,6 +185,7 @@ public class BOJ_20058_마법사상어와파이어스톰_김하연 {
 		}
 	
 	}
+	// 얼음의 크기를 구한다.(bfs)
 	public static int searchIce(int r,int c, int mapSize) {
 		int curSize=1;
 		
@@ -207,6 +210,7 @@ public class BOJ_20058_마법사상어와파이어스톰_김하연 {
 				// 얼음이 없는 칸인 경우
 				if (A[nextX][nextY]==0) continue;
 				
+				// 조건에 만족하는 얼음칸을 큐에 넣어 다른 범위의 얼음칸을 탐색한다.
 				que.offer(new int[] {nextX,nextY});
 				curSize+=1;
 				visited[nextX][nextY]=true;
@@ -215,4 +219,5 @@ public class BOJ_20058_마법사상어와파이어스톰_김하연 {
 		
 		return curSize;
 	}
+
 }
